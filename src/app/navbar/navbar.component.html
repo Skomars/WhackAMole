@@ -1,35 +1,41 @@
-<nav class="bg-white border-gray-200 px-2 py-2.5 rounded">
-  <div class="container flex items-center justify-between mx-auto">
-    <a href="#" class="flex items-center">
+<nav class="bg-white px-2 flex justify-around">
+  <div class="container flex items-center justify-between w-screen">
+    <div class="flex items-center w-fit">
       <img
         src="../../assets/mole-unwhacked.png"
         class="h-6 mr-3 sm:h-12"
-        alt="Flowbite Logo"
+        alt=""
         id="moleUnwacked"
       />
-      <span class="self-center text-xl font-semibold whitespace-nowrap"
-        >Whack-a-Mole!</span
-      >
-    </a>
-    <div class="flex order-3">
+      <div class="text-xl font-semibold cursor-default">Whack-a-Mole!</div>
+    </div>
+    <div class="flex order-3 ml-28">
       <button
         type="button"
         class="text-white bg-gray-900 hover:bg-slate-600 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-1.5 text-center mr-3"
+        routerLink="/game"
+        routerLinkActive="active"
       >
-        Whack!
+        Play!
       </button>
     </div>
-    <div class="items-center justify-between w-full" id="navbar-cta">
+    <div class="items-center gap-10 flex" id="navbar-cta w-auto">
       <ul
-        class="flex p-4 mt-0 flex-row text-sm font-medium items-center justify-center"
+        class="flex mt-0 flex-row text-sm gap-20 font-medium items-center justify-center w-auto"
       >
         <li>
-          <a href="#" class="py-2 pl-3 pr-4 text-slate-500 hover:text-slate-900"
-            >Highscores</a
+          <a
+            class="py-2 text-slate-500 hover:text-black hover:underline"
+            routerLink="/highscore"
+            routerLinkActive="active"
+            >Highscore</a
           >
         </li>
         <li>
-          <a href="#" class="py-2 pl-3 pr-4 text-slate-500 hover:text-slate-900"
+          <a
+            class="py-2 text-slate-500 hover:text-black hover:underline"
+            routerLink="/about"
+            routerLinkActive="active"
             >About</a
           >
         </li>
