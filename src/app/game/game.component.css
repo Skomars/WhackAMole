@@ -13,3 +13,11 @@
   border-radius: 10px;
   box-shadow: 2px 2px 7px rgb(162, 162, 162);
 }
+
+.moleVisible {
+  background-color: rgb(121, 222, 141);
+}
+
+.moleHidden {
+  background-color: rgb(241, 197, 197);
+}

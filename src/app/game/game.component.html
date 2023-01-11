@@ -3,22 +3,25 @@
 >
   <div class="game-header flex flex-row justify-between items-end w-50 gap-6">
     <div class="time-container flex flex-col">
-      <div class="title cursor-default">Remaning time:</div>
+      <div class="title cursor-default">Remaining time:</div>
       <div class="remaning-time font-bold text-3xl cursor-default">
-        {{ currentCountervalue }}
+        {{ _gameLogicService.currentCountervalue }}
       </div>
     </div>
 
     <div class="point-container">
       <div class="title cursor-default">Points:</div>
-      <div class="points font-bold text-3xl cursor-default">8</div>
+      <div class="points font-bold text-3xl cursor-default">
+        {{ gameBoard.points }}
+      </div>
     </div>
 
     <button
       type="button"
       class="text-white disabled:bg-slate-600 disabled:cursor-not-allowed bg-gray-900 hover:bg-slate-600 rounded-lg text-sm px-4 text-center mr-3 h-8"
-      (click)="startWhacking()"
-      [disabled]="buttonDisabled"
+      (click)="_gameLogicService.startWhacking()"
+      [disabled]="_gameLogicService.gameActive"
+      id="startWhackBtn"
     >
       Start whacking!
     </button>
@@ -26,14 +29,14 @@
 
   <div
     class="gamestatus mt-6 cursor-default font-bold"
-    *ngIf="currentCountervalue === 0"
+    *ngIf="_gameLogicService.currentCountervalue === 0"
   >
     Game is finished!
   </div>
 
   <div
     class="gamestatus mt-6 cursor-default font-bold"
-    *ngIf="currentCountervalue === gametime"
+    *ngIf="_gameLogicService.currentCountervalue === _gameLogicService.gametime"
   >
     Waiting for a new game
   </div>
@@ -41,9 +44,9 @@
   <div
     class="gamestatus mt-6 cursor-default font-bold"
     *ngIf="
-      currentCountervalue < gametime &&
-      currentCountervalue > 0 &&
-      currentCountervalue > 10
+      _gameLogicService.currentCountervalue < _gameLogicService.gametime &&
+      _gameLogicService.currentCountervalue > 0 &&
+      _gameLogicService.currentCountervalue > 10
     "
   >
     Currently whacking moles..
@@ -51,88 +54,271 @@
 
   <div
     class="gamestatus mt-6 cursor-default font-bold"
-    *ngIf="currentCountervalue <= 10"
+    *ngIf="
+      _gameLogicService.currentCountervalue <= 10 &&
+      _gameLogicService.currentCountervalue !== 0
+    "
   >
-    Only {{ currentCountervalue }} seconds left!
+    Only {{ _gameLogicService.currentCountervalue }} seconds left!
   </div>
 
   <div
     class="container tiles-container mt-6 mx-auto w-auto grid grid-cols-5 gap-2 content-evenly justify-around"
   >
-    <div class="tile bg-teal-500">
-      <h1 class="tile-marker"></h1>
+    <ng-container *ngFor="let tile of gameBoard.tiles; let i = index">
+      <div
+        class="tile"
+        (click)="_gameLogicService.whackTile(i)"
+        [ngStyle]="{
+          cursor: gameBoard.gameActive === true ? 'pointer' : 'default'
+        }"
+        [ngClass]="
+          gameBoard.tiles[i].moleVisible ? 'moleVisible' : 'moleHidden'
+        "
+      >
+        {{ gameBoard.tiles[i].moleVisible }}
+      </div>
+    </ng-container>
+
+    <!-- <div
+      class="tile"
+      (click)="_gameLogicService.whackTile(1)"
+      [ngStyle]="{
+        cursor: gameBoard.gameActive === true ? 'pointer' : 'default'
+      }"
+      [ngClass]="gameBoard.tiles[1].moleVisible ? 'moleVisible' : 'moleHidden'"
+    >
+      {{ gameBoard.tiles[1].moleVisible }}
     </div>
-    <div class="tile bg-teal-500">
-      <h1 class="tile-marker"></h1>
+    <div
+      class="tile"
+      (click)="_gameLogicService.whackTile(2)"
+      [ngStyle]="{
+        cursor: gameBoard.gameActive === true ? 'pointer' : 'default'
+      }"
+      [ngClass]="gameBoard.tiles[2].moleVisible ? 'moleVisible' : 'moleHidden'"
+    >
+      {{ gameBoard.tiles[2].moleVisible }}
     </div>
-    <div class="tile bg-teal-500">
-      <h1 class="tile-marker"></h1>
+    <div
+      class="tile"
+      (click)="_gameLogicService.whackTile(3)"
+      [ngStyle]="{
+        cursor: _gameLogicService.gameActive === true ? 'pointer' : 'default'
+      }"
+      [ngClass]="gameBoard.tiles[3].moleVisible ? 'moleVisible' : 'moleHidden'"
+    >
+      {{ gameBoard.tiles[3].moleVisible }}
     </div>
-    <div class="tile bg-teal-500">
-      <h1 class="tile-marker"></h1>
+    <div
+      class="tile"
+      (click)="_gameLogicService.whackTile(4)"
+      [ngStyle]="{
+        cursor: gameBoard.gameActive === true ? 'pointer' : 'default'
+      }"
+      [ngClass]="gameBoard.tiles[4].moleVisible ? 'moleVisible' : 'moleHidden'"
+    >
+      {{ gameBoard.tiles[4].moleVisible }}
     </div>
-    <div class="tile bg-teal-500">
-      <h1 class="tile-marker"></h1>
+    <div
+      class="tile"
+      (click)="_gameLogicService.whackTile(5)"
+      [ngStyle]="{
+        cursor: gameBoard.gameActive === true ? 'pointer' : 'default'
+      }"
+      [ngClass]="gameBoard.tiles[5].moleVisible ? 'moleVisible' : 'moleHidden'"
+    >
+      {{ gameBoard.tiles[5].moleVisible }}
     </div>
-    <div class="tile bg-teal-500">
-      <h1 class="tile-marker"></h1>
+    <div
+      class="tile"
+      (click)="_gameLogicService.whackTile(6)"
+      [ngStyle]="{
+        cursor: gameBoard.gameActive === true ? 'pointer' : 'default'
+      }"
+      [ngClass]="gameBoard.tiles[6].moleVisible ? 'moleVisible' : 'moleHidden'"
+    >
+      {{ gameBoard.tiles[6].moleVisible }}
     </div>
-    <div class="tile bg-teal-500">
-      <h1 class="tile-marker"></h1>
+    <div
+      class="tile"
+      (click)="_gameLogicService.whackTile(7)"
+      [ngStyle]="{
+        cursor: gameBoard.gameActive === true ? 'pointer' : 'default'
+      }"
+      [ngClass]="gameBoard.tiles[7].moleVisible ? 'moleVisible' : 'moleHidden'"
+    >
+      {{ gameBoard.tiles[7].moleVisible }}
     </div>
-    <div class="tile bg-teal-500">
-      <h1 class="tile-marker"></h1>
+    <div
+      class="tile"
+      (click)="_gameLogicService.whackTile(8)"
+      [ngStyle]="{
+        cursor: gameBoard.gameActive === true ? 'pointer' : 'default'
+      }"
+      [ngClass]="gameBoard.tiles[8].moleVisible ? 'moleVisible' : 'moleHidden'"
+    >
+      {{ gameBoard.tiles[8].moleVisible }}
     </div>
-    <div class="tile bg-teal-500">
-      <h1 class="tile-marker"></h1>
+    <div
+      class="tile"
+      (click)="_gameLogicService.whackTile(9)"
+      [ngStyle]="{
+        cursor: gameBoard.gameActive === true ? 'pointer' : 'default'
+      }"
+      [ngClass]="gameBoard.tiles[9].moleVisible ? 'moleVisible' : 'moleHidden'"
+    >
+      {{ gameBoard.tiles[9].moleVisible }}
     </div>
-    <div class="tile bg-teal-500">
-      <h1 class="tile-marker"></h1>
+    <div
+      class="tile"
+      (click)="_gameLogicService.whackTile(10)"
+      [ngStyle]="{
+        cursor: gameBoard.gameActive === true ? 'pointer' : 'default'
+      }"
+      [ngClass]="gameBoard.tiles[10].moleVisible ? 'moleVisible' : 'moleHidden'"
+    >
+      {{ gameBoard.tiles[10].moleVisible }}
     </div>
-    <div class="tile bg-teal-500">
-      <h1 class="tile-marker"></h1>
+    <div
+      class="tile"
+      (click)="_gameLogicService.whackTile(11)"
+      [ngStyle]="{
+        cursor: gameBoard.gameActive === true ? 'pointer' : 'default'
+      }"
+      [ngClass]="gameBoard.tiles[11].moleVisible ? 'moleVisible' : 'moleHidden'"
+    >
+      {{ gameBoard.tiles[11].moleVisible }}
     </div>
-    <div class="tile bg-teal-500">
-      <h1 class="tile-marker"></h1>
+    <div
+      class="tile"
+      (click)="_gameLogicService.whackTile(12)"
+      [ngStyle]="{
+        cursor: gameBoard.gameActive === true ? 'pointer' : 'default'
+      }"
+      [ngClass]="gameBoard.tiles[12].moleVisible ? 'moleVisible' : 'moleHidden'"
+    >
+      {{ gameBoard.tiles[12].moleVisible }}
     </div>
-    <div class="tile bg-teal-500">
-      <h1 class="tile-marker"></h1>
+    <div
+      class="tile"
+      (click)="_gameLogicService.whackTile(13)"
+      [ngStyle]="{
+        cursor: gameBoard.gameActive === true ? 'pointer' : 'default'
+      }"
+      [ngClass]="gameBoard.tiles[13].moleVisible ? 'moleVisible' : 'moleHidden'"
+    >
+      {{ gameBoard.tiles[13].moleVisible }}
     </div>
-    <div class="tile bg-teal-500">
-      <h1 class="tile-marker"></h1>
+    <div
+      class="tile"
+      (click)="_gameLogicService.whackTile(14)"
+      [ngStyle]="{
+        cursor: gameBoard.gameActive === true ? 'pointer' : 'default'
+      }"
+      [ngClass]="gameBoard.tiles[14].moleVisible ? 'moleVisible' : 'moleHidden'"
+    >
+      {{ gameBoard.tiles[14].moleVisible }}
     </div>
-    <div class="tile bg-teal-500">
-      <h1 class="tile-marker"></h1>
+    <div
+      class="tile"
+      (click)="_gameLogicService.whackTile(15)"
+      [ngStyle]="{
+        cursor: gameBoard.gameActive === true ? 'pointer' : 'default'
+      }"
+      [ngClass]="gameBoard.tiles[15].moleVisible ? 'moleVisible' : 'moleHidden'"
+    >
+      {{ gameBoard.tiles[15].moleVisible }}
     </div>
-    <div class="tile bg-teal-500">
-      <h1 class="tile-marker"></h1>
+    <div
+      class="tile"
+      (click)="_gameLogicService.whackTile(16)"
+      [ngStyle]="{
+        cursor: gameBoard.gameActive === true ? 'pointer' : 'default'
+      }"
+      [ngClass]="gameBoard.tiles[16].moleVisible ? 'moleVisible' : 'moleHidden'"
+    >
+      {{ gameBoard.tiles[16].moleVisible }}
     </div>
-    <div class="tile bg-teal-500">
-      <h1 class="tile-marker"></h1>
+    <div
+      class="tile"
+      (click)="_gameLogicService.whackTile(17)"
+      [ngStyle]="{
+        cursor: gameBoard.gameActive === true ? 'pointer' : 'default'
+      }"
+      [ngClass]="gameBoard.tiles[17].moleVisible ? 'moleVisible' : 'moleHidden'"
+    >
+      {{ gameBoard.tiles[17].moleVisible }}
     </div>
-    <div class="tile bg-teal-500">
-      <h1 class="tile-marker"></h1>
+    <div
+      class="tile"
+      (click)="_gameLogicService.whackTile(18)"
+      [ngStyle]="{
+        cursor: gameBoard.gameActive === true ? 'pointer' : 'default'
+      }"
+      [ngClass]="gameBoard.tiles[18].moleVisible ? 'moleVisible' : 'moleHidden'"
+    >
+      {{ gameBoard.tiles[18].moleVisible }}
     </div>
-    <div class="tile bg-teal-500">
-      <h1 class="tile-marker"></h1>
+    <div
+      class="tile"
+      (click)="_gameLogicService.whackTile(19)"
+      [ngStyle]="{
+        cursor: gameBoard.gameActive === true ? 'pointer' : 'default'
+      }"
+      [ngClass]="gameBoard.tiles[19].moleVisible ? 'moleVisible' : 'moleHidden'"
+    >
+      {{ gameBoard.tiles[19].moleVisible }}
     </div>
-    <div class="tile bg-teal-500">
-      <h1 class="tile-marker"></h1>
+    <div
+      class="tile"
+      (click)="_gameLogicService.whackTile(20)"
+      [ngStyle]="{
+        cursor: gameBoard.gameActive === true ? 'pointer' : 'default'
+      }"
+      [ngClass]="gameBoard.tiles[20].moleVisible ? 'moleVisible' : 'moleHidden'"
+    >
+      {{ gameBoard.tiles[20].moleVisible }}
     </div>
-    <div class="tile bg-teal-500">
-      <h1 class="tile-marker"></h1>
+    <div
+      class="tile"
+      (click)="_gameLogicService.whackTile(21)"
+      [ngStyle]="{
+        cursor: gameBoard.gameActive === true ? 'pointer' : 'default'
+      }"
+      [ngClass]="gameBoard.tiles[21].moleVisible ? 'moleVisible' : 'moleHidden'"
+    >
+      {{ gameBoard.tiles[21].moleVisible }}
     </div>
-    <div class="tile bg-teal-500">
-      <h1 class="tile-marker"></h1>
+    <div
+      class="tile"
+      (click)="_gameLogicService.whackTile(22)"
+      [ngStyle]="{
+        cursor: gameBoard.gameActive === true ? 'pointer' : 'default'
+      }"
+      [ngClass]="gameBoard.tiles[22].moleVisible ? 'moleVisible' : 'moleHidden'"
+    >
+      {{ gameBoard.tiles[22].moleVisible }}
     </div>
-    <div class="tile bg-teal-500">
-      <h1 class="tile-marker"></h1>
+    <div
+      class="tile"
+      (click)="_gameLogicService.whackTile(23)"
+      [ngStyle]="{
+        cursor: gameBoard.gameActive === true ? 'pointer' : 'default'
+      }"
+      [ngClass]="gameBoard.tiles[23].moleVisible ? 'moleVisible' : 'moleHidden'"
+    >
+      {{ gameBoard.tiles[23].moleVisible }}
     </div>
-    <div class="tile bg-teal-500">
-      <h1 class="tile-marker"></h1>
-    </div>
-    <div class="tile bg-teal-500">
-      <h1 class="tile-marker"></h1>
-    </div>
+    <div
+      class="tile"
+      (click)="_gameLogicService.whackTile(24)"
+      [ngStyle]="{
+        cursor: gameBoard.gameActive === true ? 'pointer' : 'default'
+      }"
+      [ngClass]="gameBoard.tiles[24].moleVisible ? 'moleVisible' : 'moleHidden'"
+    >
+      {{ gameBoard.tiles[24].moleVisible }}
+    </div> -->
   </div>
 </div>

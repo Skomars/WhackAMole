@@ -1,32 +1,64 @@
-import { Component } from '@angular/core';
-import { interval, take } from 'rxjs';
+import { Component, OnInit } from '@angular/core';
+
+import { GameLogicService } from './gamelogic.service';
+import { Gameboard } from '../models/Gameboard';
+import { Tile } from '../models/Tile';
 
 @Component({
   selector: 'app-game',
   templateUrl: './game.component.html',
   styleUrls: ['./game.component.css'],
 })
-export class GameComponent {
-  numbers = interval(1000);
+export class GameComponent implements OnInit {
+  constructor(public _gameLogicService: GameLogicService) {}
 
-  gametime: number = 20;
-  currentCountervalue: number = this.gametime;
-  timeSettingCounter: number = this.gametime;
-  gameMessage: string = 'Game is finished!';
-  buttonDisabled: boolean = false;
+  tile: Tile = { hit: false, moleVisible: false, moleTimer: 0 };
 
-  countdownEngine = this.numbers.pipe(take(this.timeSettingCounter));
-  startWhacking() {
-    this.countdownEngine.subscribe((val) => {
-      if (val <= this.timeSettingCounter) {
-        this.buttonDisabled = true;
-        this.currentCountervalue--;
-        console.log(this.currentCountervalue);
-      }
-      if (this.currentCountervalue === 0) {
-        this.buttonDisabled = false;
-        this.currentCountervalue = this.gametime;
-      }
+  gameBoard: Gameboard = {
+    tiles: [
+      { hit: false, moleVisible: false, moleTimer: 0 },
+      { hit: false, moleVisible: false, moleTimer: 0 },
+      { hit: false, moleVisible: false, moleTimer: 0 },
+      { hit: false, moleVisible: false, moleTimer: 0 },
+      { hit: false, moleVisible: false, moleTimer: 0 },
+      { hit: false, moleVisible: false, moleTimer: 0 },
+      { hit: false, moleVisible: false, moleTimer: 0 },
+      { hit: false, moleVisible: false, moleTimer: 0 },
+      { hit: false, moleVisible: false, moleTimer: 0 },
+      { hit: false, moleVisible: false, moleTimer: 0 },
+      { hit: false, moleVisible: false, moleTimer: 0 },
+      { hit: false, moleVisible: false, moleTimer: 0 },
+      { hit: false, moleVisible: false, moleTimer: 0 },
+      { hit: false, moleVisible: false, moleTimer: 0 },
+      { hit: false, moleVisible: false, moleTimer: 0 },
+      { hit: false, moleVisible: false, moleTimer: 0 },
+      { hit: false, moleVisible: false, moleTimer: 0 },
+      { hit: false, moleVisible: false, moleTimer: 0 },
+      { hit: false, moleVisible: false, moleTimer: 0 },
+      { hit: false, moleVisible: false, moleTimer: 0 },
+      { hit: false, moleVisible: false, moleTimer: 0 },
+      { hit: false, moleVisible: false, moleTimer: 0 },
+      { hit: false, moleVisible: false, moleTimer: 0 },
+      { hit: false, moleVisible: false, moleTimer: 0 },
+      { hit: false, moleVisible: false, moleTimer: 0 },
+    ],
+    gameActive: false,
+    gameTimer: 0,
+    points: 0,
+  };
+
+  ngOnInit() {
+    console.log('Gamecomp ononit');
+
+    this._gameLogicService.resetGameBoard();
+    this._gameLogicService.gameBoardDataObservable$.subscribe((serviceData) => {
+      console.log('The service data:');
+      console.log(serviceData);
+      this.gameBoard = serviceData;
+      console.log('This gameboard data:');
+      console.log(this.gameBoard);
     });
   }
+
+  gameMessage: string = 'Game is finished!';
 }
