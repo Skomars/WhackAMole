@@ -12,6 +12,7 @@ import { Tile } from '../models/Tile';
 export class GameComponent implements OnInit {
   constructor(public _gameLogicService: GameLogicService) {}
 
+  gameMessage: string = 'Game is finished!';
   tile: Tile = { hit: false, moleVisible: false, moleTimer: 0 };
 
   gameBoard: Gameboard = {
@@ -48,17 +49,16 @@ export class GameComponent implements OnInit {
   };
 
   ngOnInit() {
-    console.log('Gamecomp ononit');
+    // console.log('Gamecomp "ngOnInit" running');
 
     this._gameLogicService.resetGameBoard();
     this._gameLogicService.gameBoardDataObservable$.subscribe((serviceData) => {
       console.log('The service data:');
       console.log(serviceData);
       this.gameBoard = serviceData;
-      console.log('This gameboard data:');
-      console.log(this.gameBoard);
+
+      // console.log('This gameboard data:');
+      // console.log(this.gameBoard);
     });
   }
-
-  gameMessage: string = 'Game is finished!';
 }
