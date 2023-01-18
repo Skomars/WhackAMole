@@ -7,7 +7,6 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { GameComponent } from './game/game.component';
 import { HighscoreComponent } from './highscore/highscore.component';
 import { AboutComponent } from './about/about.component';
-import { SplashComponent } from './splash/splash.component';
 import { GameLogicService } from './game/gamelogic.service';
 
 @NgModule({
@@ -17,7 +16,6 @@ import { GameLogicService } from './game/gamelogic.service';
     HighscoreComponent,
     AboutComponent,
     GameComponent,
-    SplashComponent,
   ],
   imports: [BrowserModule, AppRoutingModule],
   providers: [GameLogicService],

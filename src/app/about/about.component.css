@@ -1,0 +1,13 @@
+.info {
+  border: 0.25px solid black;
+  border-radius: 10px;
+  box-shadow: 2px 2px 7px rgb(162, 162, 162);
+}
+
+.imgContainer {
+  display: flex;
+  flex-direction: column;
+  justify-items: flex-start;
+  width: 5rem;
+  height: auto;
+}

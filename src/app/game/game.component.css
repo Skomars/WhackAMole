@@ -4,7 +4,7 @@
   align-items: center;
   height: 50px;
   width: 50px;
-  border: 0.5px solid black;
+  border: 0.1px solid rgba(0, 0, 0, 0);
   cursor: pointer;
 }
 
@@ -15,9 +15,13 @@
 }
 
 .moleVisible {
-  background-color: rgb(74, 184, 96);
+  background-image: url("../../assets/mole-unwhacked.png");
+  background-size: contain;
+  background-repeat: no-repeat;
 }
 
 .moleHidden {
-  background-color: rgb(189, 75, 75);
+  background-image: url("../../assets/woddenbox.png");
+  background-size: contain;
+  background-repeat: no-repeat;
 }

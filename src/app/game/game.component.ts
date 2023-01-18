@@ -4,13 +4,17 @@ import { GameLogicService } from './gamelogic.service';
 import { Gameboard } from '../models/Gameboard';
 import { Tile } from '../models/Tile';
 
+import { Subscription } from 'rxjs';
+
 @Component({
   selector: 'app-game',
   templateUrl: './game.component.html',
   styleUrls: ['./game.component.css'],
 })
 export class GameComponent implements OnInit {
-  constructor(public _gameLogicService: GameLogicService) {}
+  constructor(public _gameLogicService: GameLogicService) {
+    this.gameBoard.gameTimer = this._gameLogicService.gametime;
+  }
 
   gameMessage: string = 'Game is finished!';
   tile: Tile = { hit: false, moleVisible: false, moleTimer: 0 };
@@ -45,20 +49,15 @@ export class GameComponent implements OnInit {
     ],
     gameActive: false,
     gameTimer: 0,
+    totalGametime: 0,
     points: 0,
   };
 
   ngOnInit() {
-    // console.log('Gamecomp "ngOnInit" running');
-
     this._gameLogicService.resetGameBoard();
     this._gameLogicService.gameBoardDataObservable$.subscribe((serviceData) => {
-      console.log('The service data:');
-      console.log(serviceData);
       this.gameBoard = serviceData;
-
-      // console.log('This gameboard data:');
-      // console.log(this.gameBoard);
+      this.gameBoard.gameTimer = this._gameLogicService.gametime;
     });
   }
 }

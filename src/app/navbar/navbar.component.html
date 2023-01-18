@@ -1,9 +1,9 @@
-<nav class="bg-white px-2 flex justify-around">
+<nav class="bg-white px-2 py-1 flex justify-around">
   <div class="container flex items-center justify-between w-screen">
     <div class="flex items-center w-fit">
       <img
         src="../../assets/mole-unwhacked.png"
-        class="h-6 mr-3 sm:h-12"
+        class="h-6 mr-3"
         alt=""
         id="moleUnwacked"
       />
@@ -25,17 +25,19 @@
       >
         <li>
           <a
-            class="py-2 text-slate-500 hover:text-black hover:underline"
+            class="py-1 text-slate-500 hover:text-black hover:underline"
             routerLink="/highscore"
             routerLinkActive="active"
+            [ngClass]="gameBoard.gameActive ? 'inactiveLink' : 'activeLink'"
             >Highscore</a
           >
         </li>
         <li>
           <a
-            class="py-2 text-slate-500 hover:text-black hover:underline"
+            class="py-1 text-slate-500 hover:text-black hover:underline"
             routerLink="/about"
             routerLinkActive="active"
+            [ngClass]="gameBoard.gameActive ? 'inactiveLink' : 'activeLink'"
             >About</a
           >
         </li>

@@ -43,6 +43,7 @@ export class GameLogicService {
     gameActive: true,
     gameTimer: 0,
     points: 0,
+    totalGametime: 0,
   };
   // tempBoardTiles: Tile = { hit: false, moleVisible: false, moleTimer: 0 };
 
@@ -53,8 +54,8 @@ export class GameLogicService {
   maxMoleDisplayTime: number = 4;
   maximumVisibleMoles: number = 3;
   minimumVisibleMoles: number = 1;
-  maxDelayUntilDisplayMole: number = 2;
-  minDelayUntilDisplayMole: number = 0.5;
+  maxDelayUntilDisplayMole: number = 3;
+  minDelayUntilDisplayMole: number = 0.75;
   selectedTile: number = 0;
   currentMolesOnBoard: number = 0;
   mool: number = 0;
@@ -80,9 +81,10 @@ export class GameLogicService {
   // Start a gamesession. Fires main timer
   startWhacking(): void {
     this.currentMolesOnBoard = 0;
+    this.gameActive = true;
     // this.resetGameBoard();
     this._gameBoardData.next(this.gameboardData);
-    this.gameActive = true;
+
     this.gameboardData.gameActive = this.gameActive;
     this.gameboardData.points = 0;
     this.points = 0;
@@ -98,7 +100,7 @@ export class GameLogicService {
         this.gameboardData.gameTimer = this.currentCountervalue;
       }
       // If time is up..
-      if (this.currentCountervalue === 0) {
+      if (this.currentCountervalue <= 0) {
         console.log('Game END');
         this.gameActive = false;
         this.gameboardData.gameActive = this.gameActive;
@@ -118,7 +120,7 @@ export class GameLogicService {
   checkMole(clickedTile: number): void {
     console.log(this.gameboardData.tiles[clickedTile].moleVisible);
 
-    if (this.gameboardData.gameActive) {
+    if (this.gameboardData.gameActive && this.gameActive) {
       if (this.gameboardData.tiles[clickedTile].moleVisible) {
         this.gameboardData.tiles[clickedTile].hit = true;
         this.gameboardData.points = this.gameboardData.points + 1;
@@ -181,10 +183,8 @@ export class GameLogicService {
         console.log(
           'Mole wasn´t clicked, set moleVisible property back to false again '
         );
-        console.warn(
-          'Current moles (fr variabel): ' + this.currentMolesOnBoard
-        );
 
+        this._gameBoardData.unsubscribe();
         this.resetMole(mole);
       }
     });

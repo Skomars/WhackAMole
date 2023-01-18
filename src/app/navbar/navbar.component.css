@@ -1,0 +1,9 @@
+.inactiveLink {
+  pointer-events: none;
+  cursor: default;
+}
+
+.activeLink {
+  pointer-events: all;
+  cursor: pointer;
+}
