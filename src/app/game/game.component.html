@@ -51,7 +51,17 @@
         [ngClass]="
           gameBoard.tiles[i].moleVisible ? 'moleVisible' : 'moleHidden'
         "
-      ></div>
+      >
+        <div
+          class="timer"
+          *ngIf="
+            this._gameLogicService.gameboardData.tiles[i].moleTimer >= 0 &&
+            this._gameLogicService.gameboardData.tiles[i].moleVisible
+          "
+        >
+          {{ this._gameLogicService.gameboardData.tiles[i].moleTimer }}
+        </div>
+      </div>
     </ng-container>
   </div>
 </div>

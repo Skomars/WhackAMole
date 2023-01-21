@@ -4,8 +4,6 @@ import { GameLogicService } from './gamelogic.service';
 import { Gameboard } from '../models/Gameboard';
 import { Tile } from '../models/Tile';
 
-import { Subscription } from 'rxjs';
-
 @Component({
   selector: 'app-game',
   templateUrl: './game.component.html',
@@ -17,35 +15,40 @@ export class GameComponent implements OnInit {
   }
 
   gameMessage: string = 'Game is finished!';
-  tile: Tile = { hit: false, moleVisible: false, moleTimer: 0 };
+  tile: Tile = {
+    hit: false,
+    moleVisible: false,
+    moleTimer: 0,
+    moleSubscription: null,
+  };
 
   gameBoard: Gameboard = {
     tiles: [
-      { hit: false, moleVisible: false, moleTimer: 0 },
-      { hit: false, moleVisible: false, moleTimer: 0 },
-      { hit: false, moleVisible: false, moleTimer: 0 },
-      { hit: false, moleVisible: false, moleTimer: 0 },
-      { hit: false, moleVisible: false, moleTimer: 0 },
-      { hit: false, moleVisible: false, moleTimer: 0 },
-      { hit: false, moleVisible: false, moleTimer: 0 },
-      { hit: false, moleVisible: false, moleTimer: 0 },
-      { hit: false, moleVisible: false, moleTimer: 0 },
-      { hit: false, moleVisible: false, moleTimer: 0 },
-      { hit: false, moleVisible: false, moleTimer: 0 },
-      { hit: false, moleVisible: false, moleTimer: 0 },
-      { hit: false, moleVisible: false, moleTimer: 0 },
-      { hit: false, moleVisible: false, moleTimer: 0 },
-      { hit: false, moleVisible: false, moleTimer: 0 },
-      { hit: false, moleVisible: false, moleTimer: 0 },
-      { hit: false, moleVisible: false, moleTimer: 0 },
-      { hit: false, moleVisible: false, moleTimer: 0 },
-      { hit: false, moleVisible: false, moleTimer: 0 },
-      { hit: false, moleVisible: false, moleTimer: 0 },
-      { hit: false, moleVisible: false, moleTimer: 0 },
-      { hit: false, moleVisible: false, moleTimer: 0 },
-      { hit: false, moleVisible: false, moleTimer: 0 },
-      { hit: false, moleVisible: false, moleTimer: 0 },
-      { hit: false, moleVisible: false, moleTimer: 0 },
+      { hit: false, moleVisible: false, moleTimer: 0, moleSubscription: null },
+      { hit: false, moleVisible: false, moleTimer: 0, moleSubscription: null },
+      { hit: false, moleVisible: false, moleTimer: 0, moleSubscription: null },
+      { hit: false, moleVisible: false, moleTimer: 0, moleSubscription: null },
+      { hit: false, moleVisible: false, moleTimer: 0, moleSubscription: null },
+      { hit: false, moleVisible: false, moleTimer: 0, moleSubscription: null },
+      { hit: false, moleVisible: false, moleTimer: 0, moleSubscription: null },
+      { hit: false, moleVisible: false, moleTimer: 0, moleSubscription: null },
+      { hit: false, moleVisible: false, moleTimer: 0, moleSubscription: null },
+      { hit: false, moleVisible: false, moleTimer: 0, moleSubscription: null },
+      { hit: false, moleVisible: false, moleTimer: 0, moleSubscription: null },
+      { hit: false, moleVisible: false, moleTimer: 0, moleSubscription: null },
+      { hit: false, moleVisible: false, moleTimer: 0, moleSubscription: null },
+      { hit: false, moleVisible: false, moleTimer: 0, moleSubscription: null },
+      { hit: false, moleVisible: false, moleTimer: 0, moleSubscription: null },
+      { hit: false, moleVisible: false, moleTimer: 0, moleSubscription: null },
+      { hit: false, moleVisible: false, moleTimer: 0, moleSubscription: null },
+      { hit: false, moleVisible: false, moleTimer: 0, moleSubscription: null },
+      { hit: false, moleVisible: false, moleTimer: 0, moleSubscription: null },
+      { hit: false, moleVisible: false, moleTimer: 0, moleSubscription: null },
+      { hit: false, moleVisible: false, moleTimer: 0, moleSubscription: null },
+      { hit: false, moleVisible: false, moleTimer: 0, moleSubscription: null },
+      { hit: false, moleVisible: false, moleTimer: 0, moleSubscription: null },
+      { hit: false, moleVisible: false, moleTimer: 0, moleSubscription: null },
+      { hit: false, moleVisible: false, moleTimer: 0, moleSubscription: null },
     ],
     gameActive: false,
     gameTimer: 0,

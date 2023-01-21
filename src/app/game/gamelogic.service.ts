@@ -1,4 +1,4 @@
-import { ComponentFactoryResolver, Injectable } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { Subject, interval, take } from 'rxjs';
 import { Tile } from '../models/Tile';
 import { Gameboard } from '../models/Gameboard';
@@ -9,116 +9,114 @@ import { Gameboard } from '../models/Gameboard';
 export class GameLogicService {
   constructor() {}
 
-  // Models
-  moleTimer: number = 0;
-  tile: Tile = { hit: false, moleVisible: false, moleTimer: 0 };
+  //* Models
+  tile: Tile = {
+    hit: false,
+    moleVisible: false,
+    moleTimer: 0,
+    moleSubscription: null,
+  };
   gameboardData: Gameboard = {
     tiles: [
-      { hit: false, moleVisible: false, moleTimer: this.moleTimer },
-      { hit: false, moleVisible: false, moleTimer: this.moleTimer },
-      { hit: false, moleVisible: false, moleTimer: this.moleTimer },
-      { hit: false, moleVisible: false, moleTimer: this.moleTimer },
-      { hit: false, moleVisible: false, moleTimer: this.moleTimer },
-      { hit: false, moleVisible: false, moleTimer: this.moleTimer },
-      { hit: false, moleVisible: false, moleTimer: this.moleTimer },
-      { hit: false, moleVisible: false, moleTimer: this.moleTimer },
-      { hit: false, moleVisible: false, moleTimer: this.moleTimer },
-      { hit: false, moleVisible: false, moleTimer: this.moleTimer },
-      { hit: false, moleVisible: false, moleTimer: this.moleTimer },
-      { hit: false, moleVisible: false, moleTimer: this.moleTimer },
-      { hit: false, moleVisible: false, moleTimer: this.moleTimer },
-      { hit: false, moleVisible: false, moleTimer: this.moleTimer },
-      { hit: false, moleVisible: false, moleTimer: this.moleTimer },
-      { hit: false, moleVisible: false, moleTimer: this.moleTimer },
-      { hit: false, moleVisible: false, moleTimer: this.moleTimer },
-      { hit: false, moleVisible: false, moleTimer: this.moleTimer },
-      { hit: false, moleVisible: false, moleTimer: this.moleTimer },
-      { hit: false, moleVisible: false, moleTimer: this.moleTimer },
-      { hit: false, moleVisible: false, moleTimer: this.moleTimer },
-      { hit: false, moleVisible: false, moleTimer: this.moleTimer },
-      { hit: false, moleVisible: false, moleTimer: this.moleTimer },
-      { hit: false, moleVisible: false, moleTimer: this.moleTimer },
-      { hit: false, moleVisible: false, moleTimer: this.moleTimer },
+      { hit: false, moleVisible: false, moleTimer: 0, moleSubscription: null },
+      { hit: false, moleVisible: false, moleTimer: 0, moleSubscription: null },
+      { hit: false, moleVisible: false, moleTimer: 0, moleSubscription: null },
+      { hit: false, moleVisible: false, moleTimer: 0, moleSubscription: null },
+      { hit: false, moleVisible: false, moleTimer: 0, moleSubscription: null },
+      { hit: false, moleVisible: false, moleTimer: 0, moleSubscription: null },
+      { hit: false, moleVisible: false, moleTimer: 0, moleSubscription: null },
+      { hit: false, moleVisible: false, moleTimer: 0, moleSubscription: null },
+      { hit: false, moleVisible: false, moleTimer: 0, moleSubscription: null },
+      { hit: false, moleVisible: false, moleTimer: 0, moleSubscription: null },
+      { hit: false, moleVisible: false, moleTimer: 0, moleSubscription: null },
+      { hit: false, moleVisible: false, moleTimer: 0, moleSubscription: null },
+      { hit: false, moleVisible: false, moleTimer: 0, moleSubscription: null },
+      { hit: false, moleVisible: false, moleTimer: 0, moleSubscription: null },
+      { hit: false, moleVisible: false, moleTimer: 0, moleSubscription: null },
+      { hit: false, moleVisible: false, moleTimer: 0, moleSubscription: null },
+      { hit: false, moleVisible: false, moleTimer: 0, moleSubscription: null },
+      { hit: false, moleVisible: false, moleTimer: 0, moleSubscription: null },
+      { hit: false, moleVisible: false, moleTimer: 0, moleSubscription: null },
+      { hit: false, moleVisible: false, moleTimer: 0, moleSubscription: null },
+      { hit: false, moleVisible: false, moleTimer: 0, moleSubscription: null },
+      { hit: false, moleVisible: false, moleTimer: 0, moleSubscription: null },
+      { hit: false, moleVisible: false, moleTimer: 0, moleSubscription: null },
+      { hit: false, moleVisible: false, moleTimer: 0, moleSubscription: null },
+      { hit: false, moleVisible: false, moleTimer: 0, moleSubscription: null },
     ],
     gameActive: true,
     gameTimer: 0,
     points: 0,
     totalGametime: 0,
   };
-  // tempBoardTiles: Tile = { hit: false, moleVisible: false, moleTimer: 0 };
 
-  // Behövs denna?
-  tileNumber: number = 0;
-
-  // Mole properties
-  maxMoleDisplayTime: number = 4;
+  //* Mole-specific properties
+  currentMolesOnBoard: number = 0;
   maximumVisibleMoles: number = 3;
   minimumVisibleMoles: number = 1;
-  maxDelayUntilDisplayMole: number = 3;
-  minDelayUntilDisplayMole: number = 0.5;
-  selectedTile: number = 0;
-  currentMolesOnBoard: number = 0;
+  maxMoleDisplayTime: number = 4;
+  maxDelayUntilDisplayMole: number = 2000;
+  minDelayUntilDisplayMole: number = 800;
 
-  // Flag indicating if a gamesession is active or not.
-  gameActive: boolean = false;
-  points: number = 0;
+  //* Timer-related properties
+  gametime: number = 30; //* Gametime setting
+  int = interval(1000);
+  currentCountervalue: number = this.gametime; //* Timer starts at gametime value and counts down to '0'
+  gameCountdownTimer = this.int.pipe(take(this.gametime));
+  moleCountdownTimer = this.int.pipe(take(this.maxMoleDisplayTime));
 
-  // Timing
-  numberOfMoles: Tile[] = [];
-  numbers = interval(1000);
-  moletime = interval(1000);
-  gametime: number = 60;
-  currentCountervalue: number = this.gametime;
-  timeSettingCounter: number = this.gametime;
-  countdownEngine = this.numbers.pipe(take(this.timeSettingCounter));
-  moleCountdownTimer = this.moletime.pipe(take(this.maxMoleDisplayTime));
-
-  // Observable/Subject
+  //* Observable/Subject
   private _gameBoardData = new Subject<Gameboard>();
   gameBoardDataObservable$ = this._gameBoardData.asObservable();
 
-  // Start a gamesession. Fires main timer
+  //* Start a gamesession. Fires main timer
   startWhacking(): void {
     console.log('Game Start');
     this.currentCountervalue = this.gametime;
     this.resetGameBoard();
     this.currentMolesOnBoard = 0;
     this._gameBoardData.next(this.gameboardData);
-    this.gameActive = true;
-    this.gameboardData.gameActive = this.gameActive;
+
+    this.gameboardData.gameActive = true;
     this.gameboardData.points = 0;
-    this.points = 0;
 
     this.moleRandomizer();
     this.moleRandomizer();
     this.moleRandomizer();
 
-    this.countdownEngine.subscribe((val) => {
-      // If time is left..
-      if (val < this.timeSettingCounter) {
+    this.gameCountdownTimer.subscribe((val) => {
+      //* If time is left..
+      if (val < this.gametime) {
         this.currentCountervalue--;
-
         this.gameboardData.gameTimer = this.currentCountervalue;
       }
-      // If time is up..
+      //* If time is up..
       if (this.currentCountervalue === 0) {
         console.log('Game END');
-        this.gameActive = false;
-        this.gameboardData.gameActive = this.gameActive;
+
+        this.gameboardData.gameActive = false;
         this.resetGameBoard();
         this.gameboardData.gameTimer = this.gametime;
+
+        this.gameboardData.tiles.forEach((mole) => {
+          mole.moleSubscription.unsubscribe();
+          mole.moleTimer = 0;
+          mole.moleVisible = false;
+        });
       }
     });
   }
 
-  // Click - Function fires when a tile is clicked
+  //* Click - Function fires when a tile is clicked
   whackTile(clickedTile: number): void {
+    this.gameboardData.tiles[clickedTile].moleSubscription.unsubscribe();
+    this.gameboardData.tiles[clickedTile].moleSubscription = null;
+    this.gameboardData.tiles[clickedTile].moleTimer = 0;
     this.checkMole(clickedTile);
     console.log(clickedTile + ' has been clicked!');
-    this.tileNumber = clickedTile;
   }
 
-  // Check if there is a hit or not
+  //* Check if there is a hit or not
   checkMole(clickedTile: number): void {
     console.log(this.gameboardData.tiles[clickedTile].moleVisible);
     console.log(this.getVisibleMoles());
@@ -127,6 +125,7 @@ export class GameLogicService {
       if (this.gameboardData.tiles[clickedTile].moleVisible) {
         this.gameboardData.tiles[clickedTile].hit = true;
         this.gameboardData.points = this.gameboardData.points + 1;
+
         console.log(' 🟢 Mole hit: _TRUE_');
 
         this.resetMole(clickedTile);
@@ -138,7 +137,7 @@ export class GameLogicService {
     }
   }
 
-  // Resetting one Mole/tile. Called if time runs out or the mole is hit
+  //* Resetting one mole. Called if time runs out or the mole is hit
   resetMole(resetMole: number): void {
     this.gameboardData.tiles[resetMole].moleVisible = false;
     this.gameboardData.tiles[resetMole].hit = false;
@@ -150,40 +149,49 @@ export class GameLogicService {
     }
   }
 
-  // Main function for generating moles
+  //* If mole should be generated, this function finds a place for the new mole to be displayed
   generateRandomMole() {
+    let selectedTile!: number;
+
     this.getVisibleMoles();
     if (this.currentMolesOnBoard < this.maximumVisibleMoles) {
       if (this.gameboardData.gameActive) {
-        this.selectedTile = Math.floor(Math.random() * 24);
+        selectedTile = Math.floor(Math.random() * 24);
 
-        while (this.gameboardData.tiles[this.selectedTile].moleVisible) {
-          this.selectedTile = Math.floor(Math.random() * 24);
+        while (this.gameboardData.tiles[selectedTile].moleVisible) {
+          selectedTile = Math.floor(Math.random() * 24);
         }
-        this.showMole(this.selectedTile);
+        //* Returning the tile where the mole will be visible, where no mole is currently visible or where a timer is currently running for the previous mole
+        this.showMole(selectedTile);
       }
     }
   }
 
-  // Called when generating a mole on gameboard
+  //* Called when generating a mole on gameboard
   showMole(mole: number) {
+    this.gameboardData.tiles[mole].moleTimer = 0;
     this.gameboardData.tiles[mole].moleVisible = true;
+
     this.currentMolesOnBoard++;
+    this.gameboardData.tiles[mole].moleSubscription =
+      this.moleCountdownTimer.subscribe((val) => {
+        val++;
+        this.gameboardData.tiles[mole].moleTimer = val;
+        console.log('Moletimer: ' + this.gameboardData.tiles[mole].moleTimer);
 
-    this.moleCountdownTimer.subscribe((val) => {
-      console.log('val:' + val);
-      val++;
+        //* If molehit = true, then "this.subscription.unsubscribe();"?
 
-      if (val === 4) {
-        console.log(
-          'Mole wasn´t clicked, set moleVisible property back to false again '
-        );
-        console.warn('Moles visible: ' + this.getVisibleMoles());
-        this.gameboardData.tiles[mole].moleTimer = 0;
-        this.resetMole(mole);
-        val = 0;
-      }
-    });
+        if (this.gameboardData.tiles[mole].moleTimer === 4) {
+          console.log(
+            'Mole wasnt clicked, set moleVisible property back to false again '
+          );
+          this.resetMole(mole);
+          this.gameboardData.tiles[mole].moleTimer = 0;
+          this.gameboardData.tiles[mole].moleSubscription.unsubscribe();
+          this.gameboardData.tiles[mole].moleSubscription = null;
+          val = 0;
+        }
+      });
   }
 
   resetGameBoard() {
@@ -193,33 +201,26 @@ export class GameLogicService {
     });
   }
 
-  // Simulating generated starting moles
+  //* Generated moles with a random delay
   moleRandomizer() {
     this.getVisibleMoles();
     if (this.currentMolesOnBoard < this.maximumVisibleMoles) {
       setTimeout(() => {
         this.generateRandomMole();
-      }, this.generateMoleDelayDisplayTime()); // Delayrandomizer if there is time
+      }, this.generateMoleDelayDisplayTime()); //* Delayrandomizer
     }
   }
 
-  // Delay until the next mole is generated
+  //* Helper function - Generates a random delay time before the next mole is generated
   generateMoleDelayDisplayTime(): number {
-    this.getVisibleMoles();
-    console.log(
-      'Mole delay timer value: ' +
-        Math.random() *
-          (this.maxDelayUntilDisplayMole - this.minDelayUntilDisplayMole) +
-        this.minDelayUntilDisplayMole
-    );
     return (
-      (Math.random() *
+      Math.random() *
         (this.maxDelayUntilDisplayMole - this.minDelayUntilDisplayMole) +
-        this.minDelayUntilDisplayMole) *
-      1000
+      this.minDelayUntilDisplayMole
     );
   }
 
+  //* Helper function - Returns the number of currently visible moles on the board
   getVisibleMoles(): number {
     this.currentMolesOnBoard = 0;
     this.gameboardData.tiles.forEach((el) => {

@@ -18,10 +18,37 @@
   background-image: url("../../assets/mole-unwhacked.png");
   background-size: contain;
   background-repeat: no-repeat;
+
+  animation: hithere 1s ease infinite;
 }
 
 .moleHidden {
   background-image: url("../../assets/woddenbox.png");
   background-size: contain;
   background-repeat: no-repeat;
+}
+
+.timer {
+  color: rgb(163, 241, 44);
+  font-weight: bold;
+  font-size: x-large;
+}
+
+@keyframes hithere {
+  30% {
+    transform: scale(0.9);
+  }
+  40%,
+  60% {
+    transform: rotate(-20deg) scale(1);
+  }
+  50% {
+    transform: rotate(20deg) scale(1);
+  }
+  70% {
+    transform: rotate(0deg) scale(1);
+  }
+  100% {
+    transform: scale(1);
+  }
 }
