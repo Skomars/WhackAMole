@@ -44,7 +44,7 @@ export class GameLogicService {
       { hit: false, moleVisible: false, moleTimer: 0, moleSubscription: null },
       { hit: false, moleVisible: false, moleTimer: 0, moleSubscription: null },
     ],
-    gameActive: true,
+    gameActive: false,
     gameTimer: 0,
     points: 0,
     totalGametime: 0,
@@ -55,8 +55,8 @@ export class GameLogicService {
   maximumVisibleMoles: number = 3;
   minimumVisibleMoles: number = 1;
   maxMoleDisplayTime: number = 4;
-  maxDelayUntilDisplayMole: number = 2000;
-  minDelayUntilDisplayMole: number = 800;
+  maxDelayUntilDisplayMole: number = 4000;
+  minDelayUntilDisplayMole: number = 1000;
 
   //* Timer-related properties
   gametime: number = 30; //* Gametime setting
@@ -69,9 +69,27 @@ export class GameLogicService {
   private _gameBoardData = new Subject<Gameboard>();
   gameBoardDataObservable$ = this._gameBoardData.asObservable();
 
+  //* Soundeffects
+
   //* Start a gamesession. Fires main timer
   startWhacking(): void {
     console.log('Game Start');
+    //* Ticking clock
+    let clock = new Audio();
+    clock.src = '../../assets/clock.wav';
+    clock.load();
+    clock.volume = 0.1;
+    clock.loop = true;
+    clock.play();
+
+    //* Gameplaymusic
+    let gameplayMusic = new Audio();
+    gameplayMusic.src = '../../assets/gameplaymusic.mp3';
+    gameplayMusic.load();
+    gameplayMusic.volume = 0.3;
+    gameplayMusic.loop = true;
+    gameplayMusic.play();
+
     this.currentCountervalue = this.gametime;
     this.resetGameBoard();
     this.currentMolesOnBoard = 0;
@@ -99,9 +117,10 @@ export class GameLogicService {
         this.gameboardData.gameTimer = this.gametime;
 
         this.gameboardData.tiles.forEach((mole) => {
-          mole.moleSubscription.unsubscribe();
           mole.moleTimer = 0;
           mole.moleVisible = false;
+          clock.pause();
+          gameplayMusic.pause();
         });
       }
     });
@@ -109,8 +128,6 @@ export class GameLogicService {
 
   //* Click - Function fires when a tile is clicked
   whackTile(clickedTile: number): void {
-    this.gameboardData.tiles[clickedTile].moleSubscription.unsubscribe();
-    this.gameboardData.tiles[clickedTile].moleSubscription = null;
     this.gameboardData.tiles[clickedTile].moleTimer = 0;
     this.checkMole(clickedTile);
     console.log(clickedTile + ' has been clicked!');
@@ -123,6 +140,15 @@ export class GameLogicService {
 
     if (this.gameboardData.gameActive) {
       if (this.gameboardData.tiles[clickedTile].moleVisible) {
+        this.gameboardData.tiles[clickedTile].moleSubscription.unsubscribe();
+        this.gameboardData.tiles[clickedTile].moleSubscription = null;
+
+        let molehit = new Audio();
+        molehit.src = '../../assets/molehit.wav';
+        molehit.load();
+        molehit.volume = 0.1;
+        molehit.play();
+
         this.gameboardData.tiles[clickedTile].hit = true;
         this.gameboardData.points = this.gameboardData.points + 1;
 
@@ -130,6 +156,14 @@ export class GameLogicService {
 
         this.resetMole(clickedTile);
       } else {
+        console.log(this.gameboardData.gameActive);
+
+        let molemiss = new Audio();
+        molemiss.src = '../../assets/molemiss.wav';
+        molemiss.load();
+        molemiss.volume = 0.1;
+        molemiss.play();
+
         console.error(' 🔴  Mole hit: _FALSE_');
       }
     } else {
@@ -172,24 +206,30 @@ export class GameLogicService {
     this.gameboardData.tiles[mole].moleTimer = 0;
     this.gameboardData.tiles[mole].moleVisible = true;
 
+    let molelaugh = new Audio();
+    molelaugh.src = '../../assets/molelaugh.wav';
+    molelaugh.load();
+    molelaugh.volume = 0.3;
+    molelaugh.play();
+
     this.currentMolesOnBoard++;
     this.gameboardData.tiles[mole].moleSubscription =
       this.moleCountdownTimer.subscribe((val) => {
-        val++;
-        this.gameboardData.tiles[mole].moleTimer = val;
-        console.log('Moletimer: ' + this.gameboardData.tiles[mole].moleTimer);
+        if (this.gameboardData.gameActive) {
+          val++;
+          this.gameboardData.tiles[mole].moleTimer = val;
+          console.log('Moletimer: ' + this.gameboardData.tiles[mole].moleTimer);
 
-        //* If molehit = true, then "this.subscription.unsubscribe();"?
-
-        if (this.gameboardData.tiles[mole].moleTimer === 4) {
-          console.log(
-            'Mole wasnt clicked, set moleVisible property back to false again '
-          );
-          this.resetMole(mole);
-          this.gameboardData.tiles[mole].moleTimer = 0;
-          this.gameboardData.tiles[mole].moleSubscription.unsubscribe();
-          this.gameboardData.tiles[mole].moleSubscription = null;
-          val = 0;
+          if (this.gameboardData.tiles[mole].moleTimer === 4) {
+            console.log(
+              'Mole wasnt clicked, set moleVisible property back to false again '
+            );
+            this.resetMole(mole);
+            this.gameboardData.tiles[mole].moleTimer = 0;
+            this.gameboardData.tiles[mole].moleSubscription.unsubscribe();
+            this.gameboardData.tiles[mole].moleSubscription = null;
+            val = 0;
+          }
         }
       });
   }

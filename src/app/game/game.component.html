@@ -56,7 +56,9 @@
           class="timer"
           *ngIf="
             this._gameLogicService.gameboardData.tiles[i].moleTimer >= 0 &&
-            this._gameLogicService.gameboardData.tiles[i].moleVisible
+            this._gameLogicService.gameboardData.tiles[i].moleVisible &&
+            this._gameLogicService.gameboardData.tiles[i].moleSubscription !==
+              null
           "
         >
           {{ this._gameLogicService.gameboardData.tiles[i].moleTimer }}
