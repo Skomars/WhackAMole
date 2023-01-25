@@ -3,4 +3,6 @@ export type Tile = {
   moleVisible: boolean;
   moleTimer: number;
   moleSubscription: any;
+  clickTimerSub: any;
+  clickTimerVal: number;
 };

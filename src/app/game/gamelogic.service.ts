@@ -15,45 +15,225 @@ export class GameLogicService {
     moleVisible: false,
     moleTimer: 0,
     moleSubscription: null,
+    clickTimerSub: null,
+    clickTimerVal: 4000,
   };
   gameboardData: Gameboard = {
     tiles: [
-      { hit: false, moleVisible: false, moleTimer: 0, moleSubscription: null },
-      { hit: false, moleVisible: false, moleTimer: 0, moleSubscription: null },
-      { hit: false, moleVisible: false, moleTimer: 0, moleSubscription: null },
-      { hit: false, moleVisible: false, moleTimer: 0, moleSubscription: null },
-      { hit: false, moleVisible: false, moleTimer: 0, moleSubscription: null },
-      { hit: false, moleVisible: false, moleTimer: 0, moleSubscription: null },
-      { hit: false, moleVisible: false, moleTimer: 0, moleSubscription: null },
-      { hit: false, moleVisible: false, moleTimer: 0, moleSubscription: null },
-      { hit: false, moleVisible: false, moleTimer: 0, moleSubscription: null },
-      { hit: false, moleVisible: false, moleTimer: 0, moleSubscription: null },
-      { hit: false, moleVisible: false, moleTimer: 0, moleSubscription: null },
-      { hit: false, moleVisible: false, moleTimer: 0, moleSubscription: null },
-      { hit: false, moleVisible: false, moleTimer: 0, moleSubscription: null },
-      { hit: false, moleVisible: false, moleTimer: 0, moleSubscription: null },
-      { hit: false, moleVisible: false, moleTimer: 0, moleSubscription: null },
-      { hit: false, moleVisible: false, moleTimer: 0, moleSubscription: null },
-      { hit: false, moleVisible: false, moleTimer: 0, moleSubscription: null },
-      { hit: false, moleVisible: false, moleTimer: 0, moleSubscription: null },
-      { hit: false, moleVisible: false, moleTimer: 0, moleSubscription: null },
-      { hit: false, moleVisible: false, moleTimer: 0, moleSubscription: null },
-      { hit: false, moleVisible: false, moleTimer: 0, moleSubscription: null },
-      { hit: false, moleVisible: false, moleTimer: 0, moleSubscription: null },
-      { hit: false, moleVisible: false, moleTimer: 0, moleSubscription: null },
-      { hit: false, moleVisible: false, moleTimer: 0, moleSubscription: null },
-      { hit: false, moleVisible: false, moleTimer: 0, moleSubscription: null },
+      {
+        hit: false,
+        moleVisible: false,
+        moleTimer: 0,
+        moleSubscription: null,
+        clickTimerSub: null,
+        clickTimerVal: 4000,
+      },
+      {
+        hit: false,
+        moleVisible: false,
+        moleTimer: 0,
+        moleSubscription: null,
+        clickTimerSub: null,
+        clickTimerVal: 4000,
+      },
+      {
+        hit: false,
+        moleVisible: false,
+        moleTimer: 0,
+        moleSubscription: null,
+        clickTimerSub: null,
+        clickTimerVal: 4000,
+      },
+      {
+        hit: false,
+        moleVisible: false,
+        moleTimer: 0,
+        moleSubscription: null,
+        clickTimerSub: null,
+        clickTimerVal: 4000,
+      },
+      {
+        hit: false,
+        moleVisible: false,
+        moleTimer: 0,
+        moleSubscription: null,
+        clickTimerSub: null,
+        clickTimerVal: 4000,
+      },
+      {
+        hit: false,
+        moleVisible: false,
+        moleTimer: 0,
+        moleSubscription: null,
+        clickTimerSub: null,
+        clickTimerVal: 4000,
+      },
+      {
+        hit: false,
+        moleVisible: false,
+        moleTimer: 0,
+        moleSubscription: null,
+        clickTimerSub: null,
+        clickTimerVal: 4000,
+      },
+      {
+        hit: false,
+        moleVisible: false,
+        moleTimer: 0,
+        moleSubscription: null,
+        clickTimerSub: null,
+        clickTimerVal: 4000,
+      },
+      {
+        hit: false,
+        moleVisible: false,
+        moleTimer: 0,
+        moleSubscription: null,
+        clickTimerSub: null,
+        clickTimerVal: 4000,
+      },
+      {
+        hit: false,
+        moleVisible: false,
+        moleTimer: 0,
+        moleSubscription: null,
+        clickTimerSub: null,
+        clickTimerVal: 4000,
+      },
+      {
+        hit: false,
+        moleVisible: false,
+        moleTimer: 0,
+        moleSubscription: null,
+        clickTimerSub: null,
+        clickTimerVal: 4000,
+      },
+      {
+        hit: false,
+        moleVisible: false,
+        moleTimer: 0,
+        moleSubscription: null,
+        clickTimerSub: null,
+        clickTimerVal: 4000,
+      },
+      {
+        hit: false,
+        moleVisible: false,
+        moleTimer: 0,
+        moleSubscription: null,
+        clickTimerSub: null,
+        clickTimerVal: 4000,
+      },
+      {
+        hit: false,
+        moleVisible: false,
+        moleTimer: 0,
+        moleSubscription: null,
+        clickTimerSub: null,
+        clickTimerVal: 4000,
+      },
+      {
+        hit: false,
+        moleVisible: false,
+        moleTimer: 0,
+        moleSubscription: null,
+        clickTimerSub: null,
+        clickTimerVal: 4000,
+      },
+      {
+        hit: false,
+        moleVisible: false,
+        moleTimer: 0,
+        moleSubscription: null,
+        clickTimerSub: null,
+        clickTimerVal: 4000,
+      },
+      {
+        hit: false,
+        moleVisible: false,
+        moleTimer: 0,
+        moleSubscription: null,
+        clickTimerSub: null,
+        clickTimerVal: 4000,
+      },
+      {
+        hit: false,
+        moleVisible: false,
+        moleTimer: 0,
+        moleSubscription: null,
+        clickTimerSub: null,
+        clickTimerVal: 4000,
+      },
+      {
+        hit: false,
+        moleVisible: false,
+        moleTimer: 0,
+        moleSubscription: null,
+        clickTimerSub: null,
+        clickTimerVal: 4000,
+      },
+      {
+        hit: false,
+        moleVisible: false,
+        moleTimer: 0,
+        moleSubscription: null,
+        clickTimerSub: null,
+        clickTimerVal: 4000,
+      },
+      {
+        hit: false,
+        moleVisible: false,
+        moleTimer: 0,
+        moleSubscription: null,
+        clickTimerSub: null,
+        clickTimerVal: 4000,
+      },
+      {
+        hit: false,
+        moleVisible: false,
+        moleTimer: 0,
+        moleSubscription: null,
+        clickTimerSub: null,
+        clickTimerVal: 4000,
+      },
+      {
+        hit: false,
+        moleVisible: false,
+        moleTimer: 0,
+        moleSubscription: null,
+        clickTimerSub: null,
+        clickTimerVal: 4000,
+      },
+      {
+        hit: false,
+        moleVisible: false,
+        moleTimer: 0,
+        moleSubscription: null,
+        clickTimerSub: null,
+        clickTimerVal: 4000,
+      },
+      {
+        hit: false,
+        moleVisible: false,
+        moleTimer: 0,
+        moleSubscription: null,
+        clickTimerSub: null,
+        clickTimerVal: 4000,
+      },
     ],
     gameActive: false,
     gameTimer: 0,
-    points: 0,
     totalGametime: 0,
+    points: 0,
+    fastestClick: null,
   };
 
-  //* Mole-specific properties
+  //* Moles - Amount of moles
   currentMolesOnBoard: number = 0;
   maximumVisibleMoles: number = 3;
   minimumVisibleMoles: number = 1;
+
+  //* Moles - Timing of moles
   maxMoleDisplayTime: number = 4;
   maxDelayUntilDisplayMole: number = 4000;
   minDelayUntilDisplayMole: number = 1000;
@@ -62,17 +242,19 @@ export class GameLogicService {
   gametime: number = 30; //* Gametime setting
   int = interval(1000);
   currentCountervalue: number = this.gametime; //* Timer starts at gametime value and counts down to '0'
-  gameCountdownTimer = this.int.pipe(take(this.gametime));
-  moleCountdownTimer = this.int.pipe(take(this.maxMoleDisplayTime));
+  gameCountdownTimer = this.int.pipe(take(this.gametime)); //* Gametime observable
+  moleCountdownTimer = this.int.pipe(take(this.maxMoleDisplayTime)); //* Moletimer observable
 
-  //* Observable/Subject
+  //* Fastest click
+  clickTimer!: any;
+
+  //* Observable (-> game.component.ts)
   private _gameBoardData = new Subject<Gameboard>();
   gameBoardDataObservable$ = this._gameBoardData.asObservable();
 
-  //* Soundeffects
-
-  //* Start a gamesession. Fires main timer
+  //* Start a gamesession.
   startWhacking(): void {
+    this.gameboardData.fastestClick = null;
     console.log('Game Start');
     //* Ticking clock
     let clock = new Audio();
@@ -98,10 +280,12 @@ export class GameLogicService {
     this.gameboardData.gameActive = true;
     this.gameboardData.points = 0;
 
+    //* Generate starting moles
     this.moleRandomizer();
     this.moleRandomizer();
     this.moleRandomizer();
 
+    //* Main timer
     this.gameCountdownTimer.subscribe((val) => {
       //* If time is left..
       if (val < this.gametime) {
@@ -135,13 +319,25 @@ export class GameLogicService {
 
   //* Check if there is a hit or not
   checkMole(clickedTile: number): void {
-    console.log(this.gameboardData.tiles[clickedTile].moleVisible);
-    console.log(this.getVisibleMoles());
+    console.log('visible moles: ' + this.getVisibleMoles());
 
     if (this.gameboardData.gameActive) {
       if (this.gameboardData.tiles[clickedTile].moleVisible) {
         this.gameboardData.tiles[clickedTile].moleSubscription.unsubscribe();
         this.gameboardData.tiles[clickedTile].moleSubscription = null;
+
+        this.clickTimer =
+          new Date().getTime() -
+          this.gameboardData.tiles[clickedTile].clickTimerSub;
+
+        if (
+          this.gameboardData.fastestClick > this.clickTimer ||
+          this.gameboardData.fastestClick === null
+        ) {
+          this.gameboardData.fastestClick = this.clickTimer;
+        }
+
+        this.clickTimer = null;
 
         let molehit = new Audio();
         molehit.src = '../../assets/molehit.wav';
@@ -197,6 +393,7 @@ export class GameLogicService {
         }
         //* Returning the tile where the mole will be visible, where no mole is currently visible or where a timer is currently running for the previous mole
         this.showMole(selectedTile);
+        //! RETURN?
       }
     }
   }
@@ -213,13 +410,20 @@ export class GameLogicService {
     molelaugh.play();
 
     this.currentMolesOnBoard++;
+
+    //* Get time when mole is visible
+    this.gameboardData.tiles[mole].clickTimerSub = new Date().getTime();
+
+    //* Subscribe
     this.gameboardData.tiles[mole].moleSubscription =
       this.moleCountdownTimer.subscribe((val) => {
+        //* If game is active, the timer for the mole will count to 4
         if (this.gameboardData.gameActive) {
           val++;
           this.gameboardData.tiles[mole].moleTimer = val;
           console.log('Moletimer: ' + this.gameboardData.tiles[mole].moleTimer);
 
+          //* If mole is not clicked, unsubscribe and reset mole
           if (this.gameboardData.tiles[mole].moleTimer === 4) {
             console.log(
               'Mole wasnt clicked, set moleVisible property back to false again '
@@ -228,6 +432,7 @@ export class GameLogicService {
             this.gameboardData.tiles[mole].moleTimer = 0;
             this.gameboardData.tiles[mole].moleSubscription.unsubscribe();
             this.gameboardData.tiles[mole].moleSubscription = null;
+
             val = 0;
           }
         }
@@ -251,7 +456,7 @@ export class GameLogicService {
     }
   }
 
-  //* Helper function - Generates a random delay time before the next mole is generated
+  //* Helper function - Generates a random delaytime before the next mole is generated
   generateMoleDelayDisplayTime(): number {
     return (
       Math.random() *

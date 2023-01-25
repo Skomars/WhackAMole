@@ -6,4 +6,5 @@ export type Gameboard = {
   gameTimer: number;
   totalGametime: number;
   points: number;
+  fastestClick: any;
 };
