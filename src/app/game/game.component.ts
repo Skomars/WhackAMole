@@ -14,7 +14,7 @@ export class GameComponent implements OnInit {
     this.gameBoard.gameTimer = this._gameLogicService.gametime;
   }
 
-  gameMessage: string = 'Game is finished!';
+  // gameMessage: string = 'Game is finished!';
   tile: Tile = {
     hit: false,
     moleVisible: false,
@@ -235,7 +235,7 @@ export class GameComponent implements OnInit {
   };
 
   ngOnInit() {
-    this._gameLogicService.resetGameBoard();
+    // this._gameLogicService.resetGameBoard();
     this._gameLogicService.gameBoardDataObservable$.subscribe((serviceData) => {
       this.gameBoard = serviceData;
       this.gameBoard.gameTimer = this._gameLogicService.gametime;
