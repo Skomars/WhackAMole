@@ -10,18 +10,17 @@ import { Tile } from '../models/Tile';
   styleUrls: ['./game.component.css'],
 })
 export class GameComponent implements OnInit {
+  // Dependancy injection of the service.
   constructor(public _gameLogicService: GameLogicService) {
     this.gameBoard.gameTimer = this._gameLogicService.gametime;
   }
 
-  // gameMessage: string = 'Game is finished!';
   tile: Tile = {
     hit: false,
     moleVisible: false,
     moleTimer: 0,
     moleSubscription: null,
     clickTimerSub: null,
-    clickTimerVal: 4000,
   };
 
   gameBoard: Gameboard = {
@@ -32,7 +31,6 @@ export class GameComponent implements OnInit {
         moleTimer: 0,
         moleSubscription: null,
         clickTimerSub: null,
-        clickTimerVal: 4000,
       },
       {
         hit: false,
@@ -40,7 +38,6 @@ export class GameComponent implements OnInit {
         moleTimer: 0,
         moleSubscription: null,
         clickTimerSub: null,
-        clickTimerVal: 4000,
       },
       {
         hit: false,
@@ -48,7 +45,6 @@ export class GameComponent implements OnInit {
         moleTimer: 0,
         moleSubscription: null,
         clickTimerSub: null,
-        clickTimerVal: 4000,
       },
       {
         hit: false,
@@ -56,7 +52,6 @@ export class GameComponent implements OnInit {
         moleTimer: 0,
         moleSubscription: null,
         clickTimerSub: null,
-        clickTimerVal: 4000,
       },
       {
         hit: false,
@@ -64,7 +59,6 @@ export class GameComponent implements OnInit {
         moleTimer: 0,
         moleSubscription: null,
         clickTimerSub: null,
-        clickTimerVal: 4000,
       },
       {
         hit: false,
@@ -72,7 +66,6 @@ export class GameComponent implements OnInit {
         moleTimer: 0,
         moleSubscription: null,
         clickTimerSub: null,
-        clickTimerVal: 4000,
       },
       {
         hit: false,
@@ -80,7 +73,6 @@ export class GameComponent implements OnInit {
         moleTimer: 0,
         moleSubscription: null,
         clickTimerSub: null,
-        clickTimerVal: 4000,
       },
       {
         hit: false,
@@ -88,7 +80,6 @@ export class GameComponent implements OnInit {
         moleTimer: 0,
         moleSubscription: null,
         clickTimerSub: null,
-        clickTimerVal: 4000,
       },
       {
         hit: false,
@@ -96,7 +87,6 @@ export class GameComponent implements OnInit {
         moleTimer: 0,
         moleSubscription: null,
         clickTimerSub: null,
-        clickTimerVal: 4000,
       },
       {
         hit: false,
@@ -104,7 +94,6 @@ export class GameComponent implements OnInit {
         moleTimer: 0,
         moleSubscription: null,
         clickTimerSub: null,
-        clickTimerVal: 4000,
       },
       {
         hit: false,
@@ -112,7 +101,6 @@ export class GameComponent implements OnInit {
         moleTimer: 0,
         moleSubscription: null,
         clickTimerSub: null,
-        clickTimerVal: 4000,
       },
       {
         hit: false,
@@ -120,7 +108,6 @@ export class GameComponent implements OnInit {
         moleTimer: 0,
         moleSubscription: null,
         clickTimerSub: null,
-        clickTimerVal: 4000,
       },
       {
         hit: false,
@@ -128,7 +115,6 @@ export class GameComponent implements OnInit {
         moleTimer: 0,
         moleSubscription: null,
         clickTimerSub: null,
-        clickTimerVal: 4000,
       },
       {
         hit: false,
@@ -136,7 +122,6 @@ export class GameComponent implements OnInit {
         moleTimer: 0,
         moleSubscription: null,
         clickTimerSub: null,
-        clickTimerVal: 4000,
       },
       {
         hit: false,
@@ -144,7 +129,6 @@ export class GameComponent implements OnInit {
         moleTimer: 0,
         moleSubscription: null,
         clickTimerSub: null,
-        clickTimerVal: 4000,
       },
       {
         hit: false,
@@ -152,7 +136,6 @@ export class GameComponent implements OnInit {
         moleTimer: 0,
         moleSubscription: null,
         clickTimerSub: null,
-        clickTimerVal: 4000,
       },
       {
         hit: false,
@@ -160,7 +143,6 @@ export class GameComponent implements OnInit {
         moleTimer: 0,
         moleSubscription: null,
         clickTimerSub: null,
-        clickTimerVal: 4000,
       },
       {
         hit: false,
@@ -168,7 +150,6 @@ export class GameComponent implements OnInit {
         moleTimer: 0,
         moleSubscription: null,
         clickTimerSub: null,
-        clickTimerVal: 4000,
       },
       {
         hit: false,
@@ -176,7 +157,6 @@ export class GameComponent implements OnInit {
         moleTimer: 0,
         moleSubscription: null,
         clickTimerSub: null,
-        clickTimerVal: 4000,
       },
       {
         hit: false,
@@ -184,7 +164,6 @@ export class GameComponent implements OnInit {
         moleTimer: 0,
         moleSubscription: null,
         clickTimerSub: null,
-        clickTimerVal: 4000,
       },
       {
         hit: false,
@@ -192,7 +171,6 @@ export class GameComponent implements OnInit {
         moleTimer: 0,
         moleSubscription: null,
         clickTimerSub: null,
-        clickTimerVal: 4000,
       },
       {
         hit: false,
@@ -200,7 +178,6 @@ export class GameComponent implements OnInit {
         moleTimer: 0,
         moleSubscription: null,
         clickTimerSub: null,
-        clickTimerVal: 4000,
       },
       {
         hit: false,
@@ -208,7 +185,6 @@ export class GameComponent implements OnInit {
         moleTimer: 0,
         moleSubscription: null,
         clickTimerSub: null,
-        clickTimerVal: 4000,
       },
       {
         hit: false,
@@ -216,7 +192,6 @@ export class GameComponent implements OnInit {
         moleTimer: 0,
         moleSubscription: null,
         clickTimerSub: null,
-        clickTimerVal: 4000,
       },
       {
         hit: false,
@@ -224,18 +199,15 @@ export class GameComponent implements OnInit {
         moleTimer: 0,
         moleSubscription: null,
         clickTimerSub: null,
-        clickTimerVal: 4000,
       },
     ],
     gameActive: false,
     gameTimer: 0,
-    totalGametime: 0,
     points: 0,
     fastestClick: null,
   };
 
   ngOnInit() {
-    // this._gameLogicService.resetGameBoard();
     this._gameLogicService.gameBoardDataObservable$.subscribe((serviceData) => {
       this.gameBoard = serviceData;
       this.gameBoard.gameTimer = this._gameLogicService.gametime;

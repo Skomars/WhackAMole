@@ -4,5 +4,4 @@ export type Tile = {
   moleTimer: number;
   moleSubscription: any;
   clickTimerSub: any;
-  clickTimerVal: number;
 };

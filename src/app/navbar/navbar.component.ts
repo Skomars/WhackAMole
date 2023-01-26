@@ -9,6 +9,7 @@ import { Tile } from '../models/Tile';
   styleUrls: ['./navbar.component.css'],
 })
 export class NavbarComponent implements OnInit {
+  // Dependency injection of the service
   constructor(public _gameLogicService: GameLogicService) {}
 
   tile: Tile = {
@@ -17,7 +18,6 @@ export class NavbarComponent implements OnInit {
     moleTimer: 0,
     moleSubscription: null,
     clickTimerSub: null,
-    clickTimerVal: 4000,
   };
 
   gameBoard: Gameboard = {
@@ -28,7 +28,6 @@ export class NavbarComponent implements OnInit {
         moleTimer: 0,
         moleSubscription: null,
         clickTimerSub: null,
-        clickTimerVal: 4000,
       },
       {
         hit: false,
@@ -36,7 +35,6 @@ export class NavbarComponent implements OnInit {
         moleTimer: 0,
         moleSubscription: null,
         clickTimerSub: null,
-        clickTimerVal: 4000,
       },
       {
         hit: false,
@@ -44,7 +42,6 @@ export class NavbarComponent implements OnInit {
         moleTimer: 0,
         moleSubscription: null,
         clickTimerSub: null,
-        clickTimerVal: 4000,
       },
       {
         hit: false,
@@ -52,7 +49,6 @@ export class NavbarComponent implements OnInit {
         moleTimer: 0,
         moleSubscription: null,
         clickTimerSub: null,
-        clickTimerVal: 4000,
       },
       {
         hit: false,
@@ -60,7 +56,6 @@ export class NavbarComponent implements OnInit {
         moleTimer: 0,
         moleSubscription: null,
         clickTimerSub: null,
-        clickTimerVal: 4000,
       },
       {
         hit: false,
@@ -68,7 +63,6 @@ export class NavbarComponent implements OnInit {
         moleTimer: 0,
         moleSubscription: null,
         clickTimerSub: null,
-        clickTimerVal: 4000,
       },
       {
         hit: false,
@@ -76,7 +70,6 @@ export class NavbarComponent implements OnInit {
         moleTimer: 0,
         moleSubscription: null,
         clickTimerSub: null,
-        clickTimerVal: 4000,
       },
       {
         hit: false,
@@ -84,7 +77,6 @@ export class NavbarComponent implements OnInit {
         moleTimer: 0,
         moleSubscription: null,
         clickTimerSub: null,
-        clickTimerVal: 4000,
       },
       {
         hit: false,
@@ -92,7 +84,6 @@ export class NavbarComponent implements OnInit {
         moleTimer: 0,
         moleSubscription: null,
         clickTimerSub: null,
-        clickTimerVal: 4000,
       },
       {
         hit: false,
@@ -100,7 +91,6 @@ export class NavbarComponent implements OnInit {
         moleTimer: 0,
         moleSubscription: null,
         clickTimerSub: null,
-        clickTimerVal: 4000,
       },
       {
         hit: false,
@@ -108,7 +98,6 @@ export class NavbarComponent implements OnInit {
         moleTimer: 0,
         moleSubscription: null,
         clickTimerSub: null,
-        clickTimerVal: 4000,
       },
       {
         hit: false,
@@ -116,7 +105,6 @@ export class NavbarComponent implements OnInit {
         moleTimer: 0,
         moleSubscription: null,
         clickTimerSub: null,
-        clickTimerVal: 4000,
       },
       {
         hit: false,
@@ -124,7 +112,6 @@ export class NavbarComponent implements OnInit {
         moleTimer: 0,
         moleSubscription: null,
         clickTimerSub: null,
-        clickTimerVal: 4000,
       },
       {
         hit: false,
@@ -132,7 +119,6 @@ export class NavbarComponent implements OnInit {
         moleTimer: 0,
         moleSubscription: null,
         clickTimerSub: null,
-        clickTimerVal: 4000,
       },
       {
         hit: false,
@@ -140,7 +126,6 @@ export class NavbarComponent implements OnInit {
         moleTimer: 0,
         moleSubscription: null,
         clickTimerSub: null,
-        clickTimerVal: 4000,
       },
       {
         hit: false,
@@ -148,7 +133,6 @@ export class NavbarComponent implements OnInit {
         moleTimer: 0,
         moleSubscription: null,
         clickTimerSub: null,
-        clickTimerVal: 4000,
       },
       {
         hit: false,
@@ -156,7 +140,6 @@ export class NavbarComponent implements OnInit {
         moleTimer: 0,
         moleSubscription: null,
         clickTimerSub: null,
-        clickTimerVal: 4000,
       },
       {
         hit: false,
@@ -164,7 +147,6 @@ export class NavbarComponent implements OnInit {
         moleTimer: 0,
         moleSubscription: null,
         clickTimerSub: null,
-        clickTimerVal: 4000,
       },
       {
         hit: false,
@@ -172,7 +154,6 @@ export class NavbarComponent implements OnInit {
         moleTimer: 0,
         moleSubscription: null,
         clickTimerSub: null,
-        clickTimerVal: 4000,
       },
       {
         hit: false,
@@ -180,7 +161,6 @@ export class NavbarComponent implements OnInit {
         moleTimer: 0,
         moleSubscription: null,
         clickTimerSub: null,
-        clickTimerVal: 4000,
       },
       {
         hit: false,
@@ -188,7 +168,6 @@ export class NavbarComponent implements OnInit {
         moleTimer: 0,
         moleSubscription: null,
         clickTimerSub: null,
-        clickTimerVal: 4000,
       },
       {
         hit: false,
@@ -196,7 +175,6 @@ export class NavbarComponent implements OnInit {
         moleTimer: 0,
         moleSubscription: null,
         clickTimerSub: null,
-        clickTimerVal: 4000,
       },
       {
         hit: false,
@@ -204,7 +182,6 @@ export class NavbarComponent implements OnInit {
         moleTimer: 0,
         moleSubscription: null,
         clickTimerSub: null,
-        clickTimerVal: 4000,
       },
       {
         hit: false,
@@ -212,7 +189,6 @@ export class NavbarComponent implements OnInit {
         moleTimer: 0,
         moleSubscription: null,
         clickTimerSub: null,
-        clickTimerVal: 4000,
       },
       {
         hit: false,
@@ -220,18 +196,18 @@ export class NavbarComponent implements OnInit {
         moleTimer: 0,
         moleSubscription: null,
         clickTimerSub: null,
-        clickTimerVal: 4000,
       },
     ],
     gameActive: false,
     gameTimer: 0,
-    totalGametime: 0,
+
     points: 0,
     fastestClick: null,
   };
 
   ngOnInit() {
-    this._gameLogicService.resetGameBoard();
+    // On init, subscribe to the observable in the service component
+    // Reason for sunscribing in the navbar, is to get the gameActive flag in order to disable links while game is active
     this._gameLogicService.gameBoardDataObservable$.subscribe((serviceData) => {
       this.gameBoard = serviceData;
     });

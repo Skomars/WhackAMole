@@ -48,6 +48,7 @@
   <div
     class="container tiles-container mt-6 mx-auto w-auto grid grid-cols-5 gap-2 content-evenly justify-around"
   >
+    <!-- Loop to render teh array -->
     <ng-container *ngFor="let tile of gameBoard.tiles; let i = index">
       <div
         class="tile"
@@ -56,6 +57,7 @@
           gameBoard.tiles[i].moleVisible ? 'moleVisible' : 'moleHidden'
         "
       >
+        <!-- For moletime testing purposes. Currently hidden using CSS -->
         <div
           class="timer"
           *ngIf="

@@ -7,7 +7,7 @@ import { HighscoreComponent } from './highscore/highscore.component';
 
 const routes: Routes = [
   { path: 'game', component: GameComponent },
-  { path: '', component: AboutComponent },
+  { path: '', component: AboutComponent }, // Default startpage
   { path: 'about', component: AboutComponent },
   { path: 'highscore', component: HighscoreComponent },
 ];

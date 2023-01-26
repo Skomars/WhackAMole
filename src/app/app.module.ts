@@ -1,8 +1,9 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { AppRoutingModule } from './app-routing.module';
-
+import { AppRoutingModule } from './app-routing.module'; // Routing
 import { AppComponent } from './app.component';
+
+// Custom imports
 import { NavbarComponent } from './navbar/navbar.component';
 import { GameComponent } from './game/game.component';
 import { HighscoreComponent } from './highscore/highscore.component';
